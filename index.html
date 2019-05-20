@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>canvas-median-cut-quantization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://tgiachett.github.io/canvas-median-cut-quantization/screenshot.png"/>
+  	<style>
+	  svg {
+	  position: absolute;
+	  }
+  .bar{
+    fill: steelblue;
+  }
+
+  .bar:hover{
+    fill: brown;
+  }
+
+	.axis {
+	  font: 10px sans-serif;
+	}
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
+	</style>
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <p>Submit a number to create a color palette and quantize the image to that palette. Currently only accepts powers of 2. Only quantize after creating a new palette. Palette data can be accessed globally from the console with the outPal variable. Histogram defaults to 100 bins</p>
+    <form id="mainDriverButtons">
+    <button id="submit">Get Palette</button>
+    <button id="quantize" style="display: none">Quantize</button>
+    </form>
+    <form>
+      <button class="button" id="back">&#8592;</button>
+      <button class="button" id="forward">&#8594;</button>
+      <button class="button" id="clear">Clear Filter</button>
+      Number of Color Channels:<input id="channels" type="number"><br>
+    </form>
+    <button id="palDataExpand">Palette Data</button>
+    <p id="textOut"></p>
+    <canvas id="canvas"></canvas>
+    <div id="svgContainer">
+      </div>
+    <canvas id="pal"></canvas>
+   
+
+   <script src="pixelManip.js"></script> 
+  </body>
+</html>
