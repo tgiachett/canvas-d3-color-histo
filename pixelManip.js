@@ -25,7 +25,7 @@ let data;
 
 function init() {
     setup(this);
-    data = getHistoDataJSON(getCountsData(ctx.getImageData(0,0, c.width, c.height), 100));
+    data = getHistoDataJSON(getCountsData(ctx.getImageData(0,0, c.width, c.height), 128));
     dMain(data);
 }
 
@@ -131,7 +131,7 @@ quantize.addEventListener("click", function(event) {
     let idataSrc = ctx.getImageData(0,0, c.width, c.height),
 	idataTrg = ctx.createImageData(c.width, c.height);
     compressColors(outPal, idataSrc, idataTrg);
-    data = getHistoDataJSON(getCountsData(ctx.getImageData(0,0, c.width, c.height), 100));
+    data = getHistoDataJSON(getCountsData(ctx.getImageData(0,0, c.width, c.height), 128));
     dMain(data);
     
     
@@ -351,7 +351,7 @@ function getSetHistoBins (channelRange, binCount) {
     for (let i = 0; i < binCount; i++) {
 	let range = [];
 	range.push(begin);
-	range.push(begin+binRangeRaw-1);
+	range.push(begin+binRangeRaw);
 	begin += binRangeRaw;
 	binRangesTot.push(range);
     }
@@ -387,15 +387,15 @@ function getCountsData (src, binCount) {
     // let gRange = getChannelRange(gVals);
     // let bRange = getChannelRange(bVals);
     //create the histogram bins based on the range data
-    let binRangesTotRed = getSetHistoBins([0, 255], binCount);
-    let binRangesTotGreen = getSetHistoBins([0, 255], binCount);
-    let binRangesTotBlue = getSetHistoBins([0, 255], binCount);
+    let binRangesTotRed = getSetHistoBins([0, 256], binCount);
+    let binRangesTotGreen = getSetHistoBins([0, 256], binCount);
+    let binRangesTotBlue = getSetHistoBins([0, 256], binCount);
     // count the colors that fall wthin each bin
     let rCounts = countItemsInRange(rVals, binRangesTotRed);
     let gCounts =countItemsInRange(gVals, binRangesTotGreen);
     let bCounts = countItemsInRange(bVals, binRangesTotBlue);
     // return counts and their corresponding ranges
-    return [[rCounts, gCounts, bCounts], [[0, 255], [0, 255], [0, 255]]];
+    return [[rCounts, gCounts, bCounts], [[0, 256], [0, 256], [0, 256]]];
 }
 
 function getHistoDataJSON (arrDataTots) {
